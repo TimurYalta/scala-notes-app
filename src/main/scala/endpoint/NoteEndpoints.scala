@@ -34,9 +34,7 @@ class NoteEndpoints[F[_] : Sync] extends Http4sDsl[F] {
   }
 
   case class NotesList(list: List[Note])
-
-//  implicit val noteListDecoder: Encoder[NotesList] = jsonOf
-
+  
   private def getNotes(noteService: NoteService[F]): HttpRoutes[F] = HttpRoutes.of[F] {
     case req @ GET -> Root / "all" =>
       val action = for {
@@ -46,7 +44,6 @@ class NoteEndpoints[F[_] : Sync] extends Http4sDsl[F] {
         listJsoned = jsoned.asJson
       } yield listJsoned
 
-//      val resp =
       Ok(action)
   }
 
