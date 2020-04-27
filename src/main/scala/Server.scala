@@ -22,7 +22,7 @@ object Server {
     val noteValidation = NoteValidationCreator[F](noteStorage)
     val notesService = NoteService[F](noteStorage, noteValidation)
     val routes = Router("/notes"-> new NoteEndpoints[F].endpoints(notesService)) //.ep(notesService).orNotFound
-//    val finalHttpApp = Logger.httpApp(true, true)(routes)
+
     for {
       exitCode <- BlazeServerBuilder[F]
         .bindHttp(8080, "0.0.0.0")
